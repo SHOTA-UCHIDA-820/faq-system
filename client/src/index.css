@@ -1,0 +1,11 @@
+* , *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Meiryo', 'Hiragino Kaku Gothic ProN', sans-serif;
+  background: #f0f2f5;
+  color: #333;
+}
