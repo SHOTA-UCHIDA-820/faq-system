@@ -52,6 +52,15 @@ app.get('/api/config', (req, res) => {
   }
 })
 
+// 本番用：client/dist の静的ファイルを配信
+const CLIENT_DIST = path.join(__dirname, '../client/dist')
+if (fs.existsSync(CLIENT_DIST)) {
+  app.use(express.static(CLIENT_DIST))
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(CLIENT_DIST, 'index.html'))
+  })
+}
+
 app.listen(PORT, () => {
   console.log(`FAQ system API サーバーが起動しました: http://localhost:${PORT}`)
 })
