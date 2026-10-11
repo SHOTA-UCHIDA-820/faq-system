@@ -15,8 +15,14 @@ function App() {
   // 初回読み込み：カテゴリ一覧・問い合わせ先設定
   useEffect(() => {
     Promise.all([
-      fetch(`${API_BASE_URL}/api/categories`).then((res) => res.json()),
-      fetch(`${API_BASE_URL}/api/config`).then((res) => res.json()),
+      fetch(`${API_BASE_URL}/api/categories`).then((res) => {
+        if (!res.ok) throw new Error('カテゴリデータの取得に失敗しました')
+        return res.json()
+      }),
+      fetch(`${API_BASE_URL}/api/config`).then((res) => {
+        if (!res.ok) throw new Error('設定情報の取得に失敗しました')
+        return res.json()
+      }),
     ])
       .then(([categoriesData, configData]) => {
         setCategories(categoriesData)
